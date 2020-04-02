@@ -1,0 +1,12 @@
+# vscode:
+.vscode
+
+# build dir:
+build/*
+
+# clang helpers:
+.clang-format
+.clang-tidy
+
+
+
