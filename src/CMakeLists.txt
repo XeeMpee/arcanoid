@@ -1,4 +1,4 @@
-project(qt_udemy)
+project(arcanoid)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)

@@ -3,6 +3,7 @@
     <file>qml/Main.qml</file>
     <file>qml/game/Game.qml</file>
     <file>qml/game_menu/GameMenu.qml</file>
+    <file>qml/routing/Routing.js</file>
     <file>qtquickcontrols2.conf</file>
 </qresource>
 

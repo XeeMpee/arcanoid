@@ -5,8 +5,6 @@ import QtQuick.Layouts 1.14
 import QtQuick.Controls.Material 2.12
 
 Page {
-    anchors.fill: parent
-
     header: Rectangle {
         height: 50
         color: Material.primary
