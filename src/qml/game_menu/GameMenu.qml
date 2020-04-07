@@ -34,6 +34,18 @@ Page {
         }
 
         Button {
+            text : "Scores"
+            Layout.alignment : menuLayout.menuAlignment
+            Layout.fillWidth: true
+
+            onClicked : {
+                console.log("Options button clicked!");
+                
+            }
+        }
+
+
+        Button {
             text : "Options"
             Layout.alignment : menuLayout.menuAlignment
             Layout.fillWidth: true
