@@ -1,9 +1,14 @@
 #include "board.hpp"
 
-Board::Board(double length)
+Board::Board(double length, const std::string &id)
     : length_(length)
+    , id_(id)
 {}
 
+const std::string Board::getId()
+{
+    return id_;
+}
 
 const double Board::getXPos()
 {

@@ -1,9 +1,13 @@
 #include "ball.hpp"
 
-Ball::Ball(double length)
-    : length_(length)
+Ball::Ball(const std::string& id)
+    : id_(id)
 {}
 
+const std::string Ball::getId()
+{
+    return id_;
+}
 
 const double Ball::getXPos()
 {
@@ -13,11 +17,6 @@ const double Ball::getXPos()
 const double Ball::getYPos()
 {
     return yPos_;
-}
-
-const double Ball::getLength()
-{
-    return length_;
 }
 
 void Ball::setXPos(const double x)

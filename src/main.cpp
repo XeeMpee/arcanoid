@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 
     QQuickView view{};
     view.setSource(QUrl("qrc:///qml/Main.qml"));
+    
 
     view.show();
     return app.exec();

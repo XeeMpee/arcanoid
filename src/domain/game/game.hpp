@@ -16,7 +16,7 @@ private:
     std::mutex isRunningMutex_;
 
 public:
-    Game(/* args */);
+    Game();
     ~Game();
     void run();
 

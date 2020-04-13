@@ -18,7 +18,7 @@ add_executable(${PROJECT_NAME}
     main.cpp
     domain/game/game.cpp
     domain/entities/board/board.cpp
-    domain/entities/ball/ball.cpp
+    domain/entities/board/qboard.cpp
     ${RESOURCES}
     )
 
