@@ -5,7 +5,10 @@
 
 #include <spdlog/spdlog.h>
 
-
+/**
+ *  Main function
+ * 
+ */
 int main(int argc, char *argv[])
 {
     spdlog::info("Application running...");

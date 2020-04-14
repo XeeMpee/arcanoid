@@ -27,10 +27,15 @@ template<typename T>
 QViewObjectGeneralized<T>::~QViewObjectGeneralized()
 {}
 
+/**
+ * Set context properties in root contextx of QQuickView
+ * @param sprites decorated sprites with qt object derivered decorator
+ */
 template<typename T>
 void QViewObjectGeneralized<T>::initSprites(std::vector<std::shared_ptr<T>> sprites)
 {
-    for(auto i : sprites) {
+    for (auto i : sprites)
+    {
         view_->rootContext()->setContextProperty(i->getId(), i.get());
     }
 }

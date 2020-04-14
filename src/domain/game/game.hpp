@@ -6,6 +6,9 @@
 #include "domain/entities/board/board.hpp"
 #include "domain/entities/i_sprite.hpp"
 
+/**
+    Docs
+ */
 class Game
 {
 private:
