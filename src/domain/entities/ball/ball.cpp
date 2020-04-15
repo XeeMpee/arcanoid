@@ -1,5 +1,7 @@
 #include "ball.hpp"
 
+namespace Arcanoid {
+
 Ball::Ball(const std::string& id)
     : id_(id)
 {}
@@ -27,4 +29,6 @@ void Ball::setXPos(const double x)
 void Ball::setYPos(const double y)
 {
     yPos_ = y;
+}
+
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "domain/entities/i_sprite.hpp"
 
+namespace Arcanoid {
+
 class Ball : public ISprite
 {
 private:
@@ -19,3 +21,5 @@ public:
 
     ~Ball() override = default;
 };
+
+}
