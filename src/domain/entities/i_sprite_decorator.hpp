@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <any>
 #include "i_sprite.hpp"
 
 class ISpriteDecorator : public ISprite

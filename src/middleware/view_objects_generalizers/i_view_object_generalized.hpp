@@ -6,12 +6,12 @@
  * Class IViewObjectGeneralized 
  * 
  */
-template<typename T>
 class IViewObjectGeneralized
 {
 public:
     /// Inits passed sprites.
-    virtual void initSprites(std::vector<std::shared_ptr<T>> sprites) = 0;
+    virtual void initSprites(std::vector<std::shared_ptr<ISprite>> sprites) = 0;
+    virtual void show() = 0;
     virtual ~IViewObjectGeneralized() = default;
 };
 

@@ -13,7 +13,7 @@ set(DOXYFILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/doxygen/doxyfile)
 set(DOXYGEN_MAIN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/doxygen)
 
 # Replace variables inside @@ with the current values
-configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} ${DOXYGEN_MAIN_DIR} @ONLY)
+configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
 
 # Doxygen won't create this for us
 file(MAKE_DIRECTORY ${DOXYGEN_OUTPUT_DIR})

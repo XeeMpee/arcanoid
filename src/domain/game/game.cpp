@@ -1,15 +1,15 @@
 #include "game.hpp"
 
-Game::Game()
+Game::Game(std::unique_ptr<IViewObjectGeneralized> view)
+    : view_(std::move(view))
 {
 
+    view_->initSprites({board_});
 }
 
-Game::~Game()
+Game::~Game() {}
+
+void Game::run()
 {
-}
-
-void Game::run() {
-    while(isRunning_) {
-    }
+    while (isRunning_) {}
 }

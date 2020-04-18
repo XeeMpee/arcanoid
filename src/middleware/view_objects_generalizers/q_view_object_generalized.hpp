@@ -1,41 +1,28 @@
 #pragma once
+
+#include <QGuiApplication>
 #include <QQuickView>
-#include <QQmlContext>
-#include <QVector>
+
+#include <spdlog/spdlog.h>
+#include <spdlog/fmt/fmt.h>
+
 #include "domain/entities/i_sprite.hpp"
 #include "i_view_object_generalized.hpp"
 
-template<typename T>
-class QViewObjectGeneralized : public IViewObjectGeneralized<T>
+class QViewObjectGeneralized : public IViewObjectGeneralized
 {
-private:
-    QQuickView *view_;
 
 public:
-    QViewObjectGeneralized(QQuickView *view);
-    ~QViewObjectGeneralized();
+    QViewObjectGeneralized();
+    ~QViewObjectGeneralized() override = default;
 
-    void initSprites(std::vector<std::shared_ptr<T>> sprites) override;
+    void initSprites(std::vector<std::shared_ptr<ISprite>> sprites) override;
+
+private:
+    std::unique_ptr<QQuickView> view_;
+    QGuiApplication app_;
+    int argcFake{0};
+
+    void registerQmlTypes();
+    void show();
 };
-
-template<typename T>
-QViewObjectGeneralized<T>::QViewObjectGeneralized(QQuickView *view)
-    : view_(view)
-{}
-
-template<typename T>
-QViewObjectGeneralized<T>::~QViewObjectGeneralized()
-{}
-
-/**
- * Set context properties in root contextx of QQuickView
- * @param sprites decorated sprites with qt object derivered decorator
- */
-template<typename T>
-void QViewObjectGeneralized<T>::initSprites(std::vector<std::shared_ptr<T>> sprites)
-{
-    for (auto i : sprites)
-    {
-        view_->rootContext()->setContextProperty(i->getId(), i.get());
-    }
-}

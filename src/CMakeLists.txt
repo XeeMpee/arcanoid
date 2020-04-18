@@ -19,14 +19,13 @@ add_executable(${PROJECT_NAME}
     domain/game/game.cpp
     domain/entities/board/board.cpp
     domain/entities/board/qboard.cpp
+    middleware/view_objects_generalizers/q_view_object_generalized.cpp
     ${RESOURCES}
     )
 
 target_include_directories(${PROJECT_NAME} PUBLIC   
     ${CMAKE_CURRENT_SOURCE_DIR}/
 )    
-
-
 
 
 target_link_libraries(${PROJECT_NAME} 

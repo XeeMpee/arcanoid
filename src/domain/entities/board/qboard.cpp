@@ -10,6 +10,10 @@ void QBoard::decore(std::unique_ptr<ISprite> sprite)
     decoratedSprite_ = std::move(sprite);
 }
 
+const std::string QBoard::getId() {
+    return decoratedSprite_->getId();
+}
+
 const double QBoard::getXPos()
 {
     return decoratedSprite_->getXPos();
@@ -29,3 +33,4 @@ void QBoard::setYPos(const double y)
 {
     decoratedSprite_->setYPos(y);
 }
+
