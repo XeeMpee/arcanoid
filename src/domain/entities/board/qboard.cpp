@@ -1,13 +1,13 @@
 #include "qboard.hpp"
 
-QBoard::QBoard(std::unique_ptr<ISprite> sprite)
+QBoard::QBoard(std::shared_ptr<ISprite> sprite)
 {
-    decore(std::move(sprite));
+    decore(sprite);
 }
 
-void QBoard::decore(std::unique_ptr<ISprite> sprite)
+void QBoard::decore(std::shared_ptr<ISprite> sprite)
 {
-    decoratedSprite_ = std::move(sprite);
+    decoratedSprite_ = sprite;
 }
 
 const std::string QBoard::getId() {

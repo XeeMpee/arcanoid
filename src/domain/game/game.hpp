@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <mutex>
+#include <future>
 
 #include "domain/entities/board/board.hpp"
 #include "domain/entities/i_sprite.hpp"
@@ -15,12 +16,12 @@
 class Game
 {
 public:
-    Game(std::unique_ptr<IViewObjectGeneralized> view);
+    Game(std::shared_ptr<IViewObjectGeneralized> view);
     ~Game();
-    void run();
+    std::future<void> run();
 
 private:
-    std::unique_ptr<IViewObjectGeneralized> view_;
+    std::shared_ptr<IViewObjectGeneralized> view_;
     std::shared_ptr<ISprite> board_{new Board(100, "board")};
 
     bool isRunning_;

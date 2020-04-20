@@ -7,5 +7,5 @@
 class ISpriteDecorator : public ISprite
 {
 public:
-    virtual void decore(std::unique_ptr<ISprite> sprite) = 0;
+    virtual void decore(std::shared_ptr<ISprite> sprite) = 0;
 };

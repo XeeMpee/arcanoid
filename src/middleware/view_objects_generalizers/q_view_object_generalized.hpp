@@ -16,7 +16,7 @@ public:
     QViewObjectGeneralized();
     ~QViewObjectGeneralized() override = default;
 
-    void initSprites(std::vector<std::shared_ptr<ISprite>> sprites) override;
+    void initSprites(std::vector<std::shared_ptr<ISpriteDecorator>> sprites) override;
 
 private:
     std::unique_ptr<QQuickView> view_;

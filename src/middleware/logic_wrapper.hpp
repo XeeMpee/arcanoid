@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "logic_wrapper/event.hpp"
+#include "event.hpp"
 
 class LogicWrapper
 {

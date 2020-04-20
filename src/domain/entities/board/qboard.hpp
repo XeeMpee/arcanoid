@@ -8,14 +8,14 @@ class QBoard : public QObject, public ISpriteDecorator
     Q_OBJECT
 
 private:
-    std::unique_ptr<ISprite> decoratedSprite_;
+    std::shared_ptr<ISprite> decoratedSprite_;
 
 public:
     QBoard() = default;
-    QBoard(std::unique_ptr<ISprite> sprite);
+    QBoard(std::shared_ptr<ISprite> sprite);
     ~QBoard() = default;
 
-    void decore(std::unique_ptr<ISprite> sprite) override;
+    void decore(std::shared_ptr<ISprite> sprite) override;
 
     const std::string getId() override;
     const double getXPos() override;

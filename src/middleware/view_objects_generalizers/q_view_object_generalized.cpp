@@ -38,7 +38,7 @@ void QViewObjectGeneralized::registerQmlTypes()
  * @param sprites decorated sprites with qt object derivered decorator
  * @throw std::runtime_error when downcasting fails
  */
-void QViewObjectGeneralized::initSprites(std::vector<std::shared_ptr<ISprite>> sprites)
+void QViewObjectGeneralized::initSprites(std::vector<std::shared_ptr<ISpriteDecorator>> sprites)
 {
     for (auto i : sprites)
     {
@@ -56,5 +56,7 @@ void QViewObjectGeneralized::initSprites(std::vector<std::shared_ptr<ISprite>> s
 
 void QViewObjectGeneralized::show()
 {
+    spdlog::info("Showing qt view...");
+    view_->show();
     app_.exec();
 }

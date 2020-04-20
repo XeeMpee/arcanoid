@@ -8,10 +8,12 @@
 int main(int argc, char *argv[])
 {
     spdlog::info("Application running...");
-    std::unique_ptr<IViewObjectGeneralized> view = std::make_unique<QViewObjectGeneralized>();
+    std::shared_ptr<IViewObjectGeneralized> view = std::make_shared<QViewObjectGeneralized>();
     spdlog::info("View has been initialized");
-    Game game{std::move(view)};
-    game.run();
+    Game game{view};
+    auto gameFuture = game.run();
+    spdlog::info("Game loop ran");
     view->show();
+
     spdlog::info("Exiting arcanoid");
 }
