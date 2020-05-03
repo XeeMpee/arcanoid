@@ -2,10 +2,10 @@
 
 QBoard::QBoard(std::shared_ptr<ISprite> sprite)
 {
-    decore(sprite);
+    decorate(sprite);
 }
 
-void QBoard::decore(std::shared_ptr<ISprite> sprite)
+void QBoard::decorate(std::shared_ptr<ISprite> sprite)
 {
     decoratedSprite_ = sprite;
 }

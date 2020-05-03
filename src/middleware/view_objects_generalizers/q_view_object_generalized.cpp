@@ -15,7 +15,6 @@ QViewObjectGeneralized::QViewObjectGeneralized()
 {
     // Qt App initialization:
     spdlog::info("Initialing QT based view...");
-    int args = 0;
     // Registing types types:
     registerQmlTypes();
     // Qt View initialization:

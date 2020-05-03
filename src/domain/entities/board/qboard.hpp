@@ -15,7 +15,7 @@ public:
     QBoard(std::shared_ptr<ISprite> sprite);
     ~QBoard() = default;
 
-    void decore(std::shared_ptr<ISprite> sprite) override;
+    void decorate(std::shared_ptr<ISprite> sprite) override;
 
     const std::string getId() override;
     const double getXPos() override;
