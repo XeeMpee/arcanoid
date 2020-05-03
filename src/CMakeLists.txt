@@ -17,6 +17,7 @@ qtquick_compiler_add_resources(RESOURCES resources.qrc)
 add_executable(${PROJECT_NAME} 
     main.cpp
     domain/game/game.cpp
+    domain/game/qgame.cpp
     domain/entities/board/board.cpp
     domain/entities/board/qboard.cpp
     middleware/view_objects_generalizers/q_view_object_generalized.cpp

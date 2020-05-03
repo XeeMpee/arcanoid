@@ -14,7 +14,7 @@
     Docs
     describe
  */
-class Game : public IGame
+class Game : public std::enable_shared_from_this<IGame>, public IGame
 {
 public:
     Game(std::shared_ptr<IViewObjectGeneralized> view);
@@ -27,8 +27,6 @@ private:
     std::shared_ptr<ISprite> board_{new Board(100, "board")};
 
     std::atomic<bool> isRunning_{false};
-    std::future<void> gameRunTask_;
+    std::shared_future<void> gameRunTask_;
     std::mutex gameLoopMutex_;
 };
-
-

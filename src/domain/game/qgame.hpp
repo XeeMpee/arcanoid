@@ -12,7 +12,7 @@ class QGame : public QObject, public IGameDecorator
 {
 public:
     QGame(std::shared_ptr<IGame> game = nullptr);
-    ~QGame();
+    ~QGame() override = default;
 
     void decorate(std::shared_ptr<IGame> game) override;
     virtual void run() override;

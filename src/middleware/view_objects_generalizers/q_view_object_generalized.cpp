@@ -2,6 +2,7 @@
 #include <QQuickStyle>
 
 #include "q_view_object_generalized.hpp"
+#include <domain/game/qgame.hpp>
 #include <domain/entities/board/qboard.hpp>
 
 /**
@@ -29,7 +30,23 @@ QViewObjectGeneralized::QViewObjectGeneralized()
 void QViewObjectGeneralized::registerQmlTypes()
 {
 
-    qmlRegisterType<QBoard>("com.arcanoid.entities", 1, 0, "Board");
+    qmlRegisterType<QGame>("com.game", 1, 0, "Game");
+    qmlRegisterType<QBoard>("com.game.entities", 1, 0, "Board");
+}
+
+/**
+ *  Inits game logic in qt impplementation of presentation layer.
+ */
+void QViewObjectGeneralized::initGame(std::shared_ptr<IGame> game)
+{
+    auto qgame = std::make_shared<QGame>(game);
+    if (qgame == nullptr)
+    {
+        const std::string errorMessage = fmt::format("QViewObjectGeneralized::initGame() | Game logic QGame  uninitialized");
+        spdlog::error(errorMessage);
+        throw std::runtime_error{errorMessage};
+    }
+    view_->rootContext()->setContextProperty("game", qgame.get());
 }
 
 /**
@@ -37,15 +54,15 @@ void QViewObjectGeneralized::registerQmlTypes()
  * @param sprites decorated sprites with qt object derivered decorator
  * @throw std::runtime_error when downcasting fails
  */
-void QViewObjectGeneralized::initSprites(std::vector<std::shared_ptr<ISpriteDecorator>> sprites)
+void QViewObjectGeneralized::initSprites(std::vector<std::shared_ptr<ISprite>> sprites)
 {
     for (auto i : sprites)
     {
         auto qsprite = std::dynamic_pointer_cast<QObject>(i);
         if (qsprite == nullptr)
         {
-            const std::string errorMessage =
-                fmt::format("QViewObjectGeneralized::initSprites() | Sprite downcasting error: {} smart pointer to QObject smart pointer.", i->getId());
+            const std::string errorMessage = fmt::format(
+                "QViewObjectGeneralized::initSprites() | Sprite downcasting error: {} smart pointer to QObject smart pointer.", i->getId());
             spdlog::error(errorMessage);
             throw std::runtime_error{errorMessage};
         }
