@@ -29,7 +29,7 @@ void Game::run()
 {
     if (isRunning_)
     {
-        throw std::runtime_error{fmt::format("")};
+        throw std::logic_error{fmt::format("Game::run() | Game has been alreadey ran")};
     }
 
     // Game loop:

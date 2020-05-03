@@ -11,7 +11,6 @@ int main(int argc, char *argv[])
     std::shared_ptr<IViewObjectGeneralized> view = std::make_shared<QViewObjectGeneralized>();
     spdlog::info("View has been initialized");
     std::shared_ptr<IGame> game = std::make_shared<Game>(view);
-    game->run();
     spdlog::info("Game loop ran");
     view->show();
 

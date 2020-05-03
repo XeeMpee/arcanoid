@@ -2,12 +2,16 @@
 
 #include <QGuiApplication>
 #include <QQuickView>
+#include <memory>
 
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/fmt.h>
 
-#include "domain/entities/i_sprite.hpp"
 #include "i_view_object_generalized.hpp"
+
+#include "domain/entities/i_sprite.hpp"
+#include <domain/game/qgame.hpp>
+#include <domain/entities/board/qboard.hpp>
 
 class QViewObjectGeneralized : public IViewObjectGeneralized
 {
@@ -20,9 +24,11 @@ public:
     void initSprites(std::vector<std::shared_ptr<ISprite>> sprites) override;
 
 private:
+    int argcFake{0};
     std::unique_ptr<QQuickView> view_;
     QGuiApplication app_;
-    int argcFake{0};
+
+    std::shared_ptr<QGame> game_{nullptr};
 
     void registerQmlTypes();
     void show();

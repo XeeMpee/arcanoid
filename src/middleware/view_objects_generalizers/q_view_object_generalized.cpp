@@ -2,8 +2,6 @@
 #include <QQuickStyle>
 
 #include "q_view_object_generalized.hpp"
-#include <domain/game/qgame.hpp>
-#include <domain/entities/board/qboard.hpp>
 
 /**
  * Initialize qt view
@@ -29,7 +27,6 @@ QViewObjectGeneralized::QViewObjectGeneralized()
  */
 void QViewObjectGeneralized::registerQmlTypes()
 {
-
     qmlRegisterType<QGame>("com.game", 1, 0, "Game");
     qmlRegisterType<QBoard>("com.game.entities", 1, 0, "Board");
 }
@@ -39,14 +36,14 @@ void QViewObjectGeneralized::registerQmlTypes()
  */
 void QViewObjectGeneralized::initGame(std::shared_ptr<IGame> game)
 {
-    auto qgame = std::make_shared<QGame>(game);
-    if (qgame == nullptr)
+    game_ = std::make_shared<QGame>(game);
+    if (game_ == nullptr)
     {
         const std::string errorMessage = fmt::format("QViewObjectGeneralized::initGame() | Game logic QGame  uninitialized");
         spdlog::error(errorMessage);
         throw std::runtime_error{errorMessage};
     }
-    view_->rootContext()->setContextProperty("game", qgame.get());
+    view_->rootContext()->setContextProperty("game", game_.get());
 }
 
 /**
@@ -56,6 +53,7 @@ void QViewObjectGeneralized::initGame(std::shared_ptr<IGame> game)
  */
 void QViewObjectGeneralized::initSprites(std::vector<std::shared_ptr<ISprite>> sprites)
 {
+    // TODO: keep all sprites in class, otherwise will be unreachable (qsprite variable dies at the end of this function)
     for (auto i : sprites)
     {
         auto qsprite = std::dynamic_pointer_cast<QObject>(i);
@@ -70,6 +68,10 @@ void QViewObjectGeneralized::initSprites(std::vector<std::shared_ptr<ISprite>> s
     }
 }
 
+/**
+ *  Execs QQuickView::show() and QApplication::exec() functions
+ *  to display presentation layer.
+ */
 void QViewObjectGeneralized::show()
 {
     spdlog::info("Showing qt view...");
