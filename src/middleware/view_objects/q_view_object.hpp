@@ -7,21 +7,20 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/fmt.h>
 
-#include "i_view_object_generalized.hpp"
-
+#include "i_view_object.hpp"
 #include "domain/entities/i_sprite.hpp"
 #include <domain/game/qgame.hpp>
-#include <domain/entities/board/qboard.hpp>
 
-class QViewObjectGeneralized : public IViewObjectGeneralized
+class QViewObject : public IViewObject
 {
-
 public:
-    QViewObjectGeneralized();
-    ~QViewObjectGeneralized() override = default;
+    QViewObject();
+    ~QViewObject() override = default;
 
     void initGame(std::shared_ptr<IGame> game) override;
-    void initSprites(std::vector<std::shared_ptr<ISprite>> sprites) override;
+    template<typename SpriteQType>
+    void initSprites(std::vector<std::shared_ptr<ISprite>> sprites);
+    void initSprites(std::vector<std::shared_ptr<Board>> boards) override;
 
 private:
     int argcFake{0};
@@ -29,6 +28,7 @@ private:
     QGuiApplication app_;
 
     std::shared_ptr<QGame> game_{nullptr};
+    std::vector<std::shared_ptr<QGame>> sprites_{nullptr};
 
     void registerQmlTypes();
     void show();

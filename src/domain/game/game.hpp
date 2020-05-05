@@ -8,7 +8,7 @@
 #include "domain/entities/board/board.hpp"
 #include "domain/entities/i_sprite.hpp"
 
-#include "middleware/view_objects_generalizers/i_view_object_generalized.hpp"
+#include "middleware/view_objects/i_view_object.hpp"
 
 /**
     Docs
@@ -17,14 +17,14 @@
 class Game : public std::enable_shared_from_this<IGame>, public IGame
 {
 public:
-    Game(std::shared_ptr<IViewObjectGeneralized> view);
+    Game(std::shared_ptr<IViewObject> view);
     ~Game();
     void run() override;
     void stop() override;
 
 private:
-    std::shared_ptr<IViewObjectGeneralized> view_;
-    std::shared_ptr<ISprite> board_{new Board(100, "board")};
+    std::shared_ptr<IViewObject> view_;
+    std::shared_ptr<Board> board_{new Board(100, "board")};
 
     std::atomic<bool> isRunning_{false};
     std::shared_future<void> gameRunTask_;

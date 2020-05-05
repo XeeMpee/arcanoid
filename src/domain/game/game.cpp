@@ -11,13 +11,13 @@
 #include "domain/entities/board/qboard.hpp"
 #include "domain/game/qgame.hpp"
 
-Game::Game(std::shared_ptr<IViewObjectGeneralized> view)
+Game::Game(std::shared_ptr<IViewObject> view)
     : view_(std::move(view))
 {
     auto wptr = std::shared_ptr<IGame>( this, [](IGame*){} );
 
     view_->initGame(shared_from_this());
-    view_->initSprites({std::make_shared<QBoard>(board_)});
+    view_->initSprites({board_});
 }
 
 Game::~Game()

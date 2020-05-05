@@ -1,14 +1,18 @@
 #include <QQmlContext>
 #include <QQuickStyle>
+#include <boost/type_index.hpp>
 
-#include "q_view_object_generalized.hpp"
+#include "q_view_object.hpp"
+
+#include <domain/entities/board/qboard.hpp>
+#include "utils/vector_subtype_converter.hpp"
 
 /**
  * Initialize qt view
  * Registers ISpriteDecotation QT using classes.
  *
  */
-QViewObjectGeneralized::QViewObjectGeneralized()
+QViewObject::QViewObject()
     : app_{argcFake, {}}
     , view_{nullptr}
 {
@@ -25,7 +29,7 @@ QViewObjectGeneralized::QViewObjectGeneralized()
  * Registers QML Types
  * To register new class invoke qmlRegister<NewType>(<params>) function.
  */
-void QViewObjectGeneralized::registerQmlTypes()
+void QViewObject::registerQmlTypes()
 {
     qmlRegisterType<QGame>("com.game", 1, 0, "Game");
     qmlRegisterType<QBoard>("com.game.entities", 1, 0, "Board");
@@ -34,7 +38,7 @@ void QViewObjectGeneralized::registerQmlTypes()
 /**
  *  Inits game logic in qt impplementation of presentation layer.
  */
-void QViewObjectGeneralized::initGame(std::shared_ptr<IGame> game)
+void QViewObject::initGame(std::shared_ptr<IGame> game)
 {
     game_ = std::make_shared<QGame>(game);
     if (game_ == nullptr)
@@ -51,28 +55,36 @@ void QViewObjectGeneralized::initGame(std::shared_ptr<IGame> game)
  * @param sprites decorated sprites with qt object derivered decorator
  * @throw std::runtime_error when downcasting fails
  */
-void QViewObjectGeneralized::initSprites(std::vector<std::shared_ptr<ISprite>> sprites)
+template<typename SpriteQType>
+void QViewObject::initSprites(std::vector<std::shared_ptr<ISprite>> sprites)
 {
-    // TODO: keep all sprites in class, otherwise will be unreachable (qsprite variable dies at the end of this function)
     for (auto i : sprites)
     {
-        auto qsprite = std::dynamic_pointer_cast<QObject>(i);
-        if (qsprite == nullptr)
+        //TODO: keep SpriteQType *sprite as <<unique_ptr>> in some kind of member vector
+        // Then it will be destroed automaticly on <<this>> destroy...
+
+        SpriteQType *sprite = new SpriteQType(i);
+        if (sprite == nullptr)
         {
-            const std::string errorMessage = fmt::format(
-                "QViewObjectGeneralized::initSprites() | Sprite downcasting error: {} smart pointer to QObject smart pointer.", i->getId());
+            const std::string errorMessage = fmt::format("QViewObject::initSprites() | Sprite of type {} is invalid.",
+                boost::typeindex::type_id_with_cvr<SpriteQType>().pretty_name());
             spdlog::error(errorMessage);
             throw std::runtime_error{errorMessage};
         }
-        view_->rootContext()->setContextProperty(i->getId().c_str(), qsprite.get());
+        view_->rootContext()->setContextProperty(sprite->getId().c_str(), sprite);
     }
+}
+
+void QViewObject::initSprites(std::vector<std::shared_ptr<Board>> boards)
+{
+    initSprites<QBoard>(VectorSubtypeConverter::convert<ISprite, Board>(boards));
 }
 
 /**
  *  Execs QQuickView::show() and QApplication::exec() functions
  *  to display presentation layer.
  */
-void QViewObjectGeneralized::show()
+void QViewObject::show()
 {
     spdlog::info("Showing qt view...");
     view_->show();
