@@ -20,7 +20,9 @@ public:
     void initGame(std::shared_ptr<IGame> game) override;
     template<typename SpriteQType>
     void initSprites(std::vector<std::shared_ptr<ISprite>> sprites);
-    void initSprites(std::vector<std::shared_ptr<Board>> boards) override;
+    void initSprites(std::vector<std::shared_ptr<Board>> sprites) override;
+    void initSprites(std::vector<std::shared_ptr<Ball>> sprites) override;
+    void initSprites(std::vector<std::shared_ptr<Block>> sprites) override;
 
 private:
     int argcFake{0};

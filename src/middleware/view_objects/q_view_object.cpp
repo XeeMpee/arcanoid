@@ -1,11 +1,13 @@
 #include <QQmlContext>
 #include <QQuickStyle>
 #include <boost/type_index.hpp>
+#include "utils/vector_subtype_converter.hpp"
 
 #include "q_view_object.hpp"
 
 #include <domain/entities/board/qboard.hpp>
-#include "utils/vector_subtype_converter.hpp"
+#include <domain/entities/ball/qball.hpp>
+#include <domain/entities/block/qblock.hpp>
 
 /**
  * Initialize qt view
@@ -75,10 +77,21 @@ void QViewObject::initSprites(std::vector<std::shared_ptr<ISprite>> sprites)
     }
 }
 
-void QViewObject::initSprites(std::vector<std::shared_ptr<Board>> boards)
+void QViewObject::initSprites(std::vector<std::shared_ptr<Board>> sprites)
 {
-    initSprites<QBoard>(VectorSubtypeConverter::convert<ISprite, Board>(boards));
+    initSprites<QBoard>(VectorSubtypeConverter::convert<ISprite, Board>(sprites));
 }
+
+void QViewObject::initSprites(std::vector<std::shared_ptr<Ball>> sprites)
+{
+    initSprites<QBall>(VectorSubtypeConverter::convert<ISprite, Ball>(sprites));
+}
+
+void QViewObject::initSprites(std::vector<std::shared_ptr<Block>> sprites)
+{
+    initSprites<QBlock>(VectorSubtypeConverter::convert<ISprite, Block>(sprites));
+}
+
 
 /**
  *  Execs QQuickView::show() and QApplication::exec() functions

@@ -1,15 +1,18 @@
 #pragma once
-#include "domain/entities/i_sprite.hpp"
 
-class Ball : public ISprite
+#include <domain/entities/i_sprite.hpp>
+
+class Block : public ISprite
 {
 private:
     std::string id_;
     double xPos_{0};
     double yPos_{0};
+    double length_;
 
 public:
-    Ball(const std::string& id="");
+    Block(double length = 100, const std::string& id = "");
+    ~Block() override = default;
     const std::string getId() override;
     const double getXPos() override;
     const double getYPos() override;
@@ -17,5 +20,6 @@ public:
     void setXPos(const double x) override;
     void setYPos(const double y) override;
 
-    ~Ball() override = default;
+    void setLength(const double length);
+
 };

@@ -4,8 +4,11 @@
 
 #include "domain/game/i_game_decorator.hpp"
 
-/**
- *  Decorator for qt presentation layer implementation.
+/** 
+ *  @brief Game class specyfic for QT based presentation layer.
+ * 
+ *  Should decorate Game class or any other IGameDecorator,
+ *  which decorates Game.
  */
 class QGame : public QObject, public IGameDecorator
 {

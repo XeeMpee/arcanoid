@@ -20,6 +20,10 @@ add_executable(${PROJECT_NAME}
     domain/game/qgame.cpp
     domain/entities/board/board.cpp
     domain/entities/board/qboard.cpp
+    domain/entities/block/block.cpp
+    domain/entities/block/qblock.cpp
+    domain/entities/ball/ball.cpp
+    domain/entities/ball/qball.cpp
     middleware/view_objects/q_view_object.cpp
     ${RESOURCES}
     )
