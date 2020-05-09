@@ -1,3 +1,4 @@
+#include <spdlog/spdlog.h>
 #include "board.hpp"
 
 
@@ -27,6 +28,8 @@ double Board::getYPos()
 
 void Board::setXPos(double x)
 {
+
+    spdlog::info("Moving board x: {}", xPos_);
     xPos_ = x;
 }
 

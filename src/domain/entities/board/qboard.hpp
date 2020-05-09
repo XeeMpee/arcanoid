@@ -32,9 +32,9 @@ public:
 
 
 signals:
-    void xPosChanged();
-    void yPosChanged();
-    void lengthChanged();
+    void xPosChanged(const double& newValue);
+    void yPosChanged(const double& newValue);
+    void lengthChanged(const double& newValue);
 
 
 private:

@@ -37,11 +37,13 @@ double QBoard::getYPos()
 void QBoard::setXPos(double x)
 {
     decoratedSprite_->setXPos(x);
+    emit xPosChanged(x);
 }
 
 void QBoard::setYPos(double y)
 {
     decoratedSprite_->setYPos(y);
+    emit yPosChanged(y);
 }
 
 const double QBoard::getLength()
