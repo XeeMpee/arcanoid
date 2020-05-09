@@ -6,8 +6,8 @@ import QtQuick.Controls 2.12
 Rectangle {
     id: root
     visible: true
-    width: 1080
-    height: 720
+    width: windowWidth
+    height: windowHeight
 
     StackView {
         property var routing : new R.Routing (

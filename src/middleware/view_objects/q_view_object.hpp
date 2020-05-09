@@ -28,10 +28,13 @@ private:
     int argcFake{0};
     std::unique_ptr<QQuickView> view_;
     QGuiApplication app_;
+    int width_{1080};
+    int height_{720};
 
     std::shared_ptr<QGame> game_{nullptr};
-    std::vector<std::shared_ptr<QGame>> sprites_{nullptr};
+    std::vector<std::unique_ptr<ISprite>> sprites_{};
 
     void registerQmlTypes();
+    void setViewProperties();
     void show();
 };

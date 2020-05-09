@@ -10,27 +10,22 @@ const std::string Block::getId()
     return id_;
 }
 
-const double Block::getXPos()
+double Block::getXPos()
 {
     return xPos_;
 }
 
-const double Block::getYPos()
+double Block::getYPos()
 {
     return yPos_;
 }
 
-const double Block::getLength()
-{
-    return length_;
-}
-
-void Block::setXPos(const double x)
+void Block::setXPos(double x)
 {
     xPos_ = x;
 }
 
-void Block::setYPos(const double y)
+void Block::setYPos(double y)
 {
     yPos_ = y;
 }

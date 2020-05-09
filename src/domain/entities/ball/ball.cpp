@@ -9,22 +9,22 @@ const std::string Ball::getId()
     return id_;
 }
 
-const double Ball::getXPos()
+double Ball::getXPos()
 {
     return xPos_;
 }
 
-const double Ball::getYPos()
+double Ball::getYPos()
 {
     return yPos_;
 }
 
-void Ball::setXPos(const double x)
+void Ball::setXPos(double x)
 {
     xPos_ = x;
 }
 
-void Ball::setYPos(const double y)
+void Ball::setYPos(double y)
 {
     yPos_ = y;
 }

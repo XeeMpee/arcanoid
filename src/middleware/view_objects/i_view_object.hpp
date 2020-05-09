@@ -10,19 +10,16 @@
 #include "domain/entities/block/block.hpp"
 
 /**
- * Class IViewObjectGeneralized 
- * 
+ * Class IViewObjectGeneralized
+ *
  */
 class IViewObject
 {
 public:
-    /// Inits passed sprites.
-    virtual void initGame(std::shared_ptr<IGame> game) = 0;
-    virtual void initSprites(std::vector<std::shared_ptr<Board>> boards) = 0;
-    virtual void initSprites(std::vector<std::shared_ptr<Ball>> boards) = 0;
-    virtual void initSprites(std::vector<std::shared_ptr<Block>> boards) = 0;
-    virtual void show() = 0;
     virtual ~IViewObject() = default;
+    virtual void initGame(std::shared_ptr<IGame> game) = 0;
+    virtual void initSprites(std::vector<std::shared_ptr<Board>> sprites) = 0;
+    virtual void initSprites(std::vector<std::shared_ptr<Ball>> sprites) = 0;
+    virtual void initSprites(std::vector<std::shared_ptr<Block>> sprites) = 0;
+    virtual void show() = 0;
 };
-
-

@@ -14,12 +14,8 @@ public:
     Block(double length = 100, const std::string& id = "");
     ~Block() override = default;
     const std::string getId() override;
-    const double getXPos() override;
-    const double getYPos() override;
-    const double getLength();
-    void setXPos(const double x) override;
-    void setYPos(const double y) override;
-
-    void setLength(const double length);
-
+    double getXPos() override;
+    double getYPos() override;
+    void setXPos(double x) override;
+    void setYPos(double y) override;
 };

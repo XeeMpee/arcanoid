@@ -18,8 +18,8 @@ public:
     void decorate(std::shared_ptr<ISprite> sprite) override;
 
     const std::string getId() override;
-    const double getXPos() override;
-    const double getYPos() override;
-    void setXPos(const double x) override;
-    void setYPos(const double y) override;
+    double getXPos() override;
+    double getYPos() override;
+    void setXPos(double x) override;
+    void setYPos(double y) override;
 };

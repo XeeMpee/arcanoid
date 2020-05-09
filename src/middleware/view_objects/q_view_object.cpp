@@ -20,10 +20,13 @@ QViewObject::QViewObject()
 {
     // Qt App initialization:
     spdlog::info("Initialing QT based view...");
+    
     // Registing types types:
     registerQmlTypes();
+    
     // Qt View initialization:
     view_ = std::make_unique<QQuickView>();
+    setViewProperties();
     view_->setSource(QUrl("qrc:///qml/Main.qml"));
 }
 
@@ -35,6 +38,18 @@ void QViewObject::registerQmlTypes()
 {
     qmlRegisterType<QGame>("com.game", 1, 0, "Game");
     qmlRegisterType<QBoard>("com.game.entities", 1, 0, "Board");
+}
+
+/**
+ *  Sets global properties of qt presentation layer
+ *
+ *  Such as window height, witth, title, etc...
+ */
+void QViewObject::setViewProperties()
+{
+    view_->rootContext()->setContextProperty("windowHeight", this->height_);
+    view_->rootContext()->setContextProperty("windowWidth", this->width_);
+    spdlog::info("Global QT properties set.");
 }
 
 /**
@@ -54,6 +69,7 @@ void QViewObject::initGame(std::shared_ptr<IGame> game)
 
 /**
  * Set context properties in root context of QQuickView
+ *
  * @param sprites decorated sprites with qt object derivered decorator
  * @throw std::runtime_error when downcasting fails
  */
@@ -62,10 +78,7 @@ void QViewObject::initSprites(std::vector<std::shared_ptr<ISprite>> sprites)
 {
     for (auto i : sprites)
     {
-        //TODO: keep SpriteQType *sprite as <<unique_ptr>> in some kind of member vector
-        // Then it will be destroed automaticly on <<this>> destroy...
-
-        SpriteQType *sprite = new SpriteQType(i);
+        auto sprite = std::make_unique<SpriteQType>(i);
         if (sprite == nullptr)
         {
             const std::string errorMessage = fmt::format("QViewObject::initSprites() | Sprite of type {} is invalid.",
@@ -73,7 +86,12 @@ void QViewObject::initSprites(std::vector<std::shared_ptr<ISprite>> sprites)
             spdlog::error(errorMessage);
             throw std::runtime_error{errorMessage};
         }
-        view_->rootContext()->setContextProperty(sprite->getId().c_str(), sprite);
+        view_->rootContext()->setContextProperty(sprite->getId().c_str(), sprite.get());
+
+        spdlog::info("Sprite initialized: \"{}\" sprite of {} type.", sprite->getId().c_str(),
+            boost::typeindex::type_id_with_cvr<SpriteQType>().pretty_name());
+
+        sprites_.push_back(std::move(sprite));
     }
 }
 
@@ -91,7 +109,6 @@ void QViewObject::initSprites(std::vector<std::shared_ptr<Block>> sprites)
 {
     initSprites<QBlock>(VectorSubtypeConverter::convert<ISprite, Block>(sprites));
 }
-
 
 /**
  *  Execs QQuickView::show() and QApplication::exec() functions

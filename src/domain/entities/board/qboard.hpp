@@ -2,13 +2,15 @@
 
 #include <QObject>
 #include "domain/entities/i_sprite_decorator.hpp"
+#include "board.hpp"
 
 class QBoard : public QObject, public ISpriteDecorator
 {
     Q_OBJECT
+    Q_PROPERTY(double x READ getXPos WRITE setXPos NOTIFY xPosChanged)
+    Q_PROPERTY(double y READ getYPos WRITE setYPos NOTIFY yPosChanged)
+    Q_PROPERTY(double length READ getLength WRITE setLength NOTIFY lengthChanged)
 
-private:
-    std::shared_ptr<ISprite> decoratedSprite_;
 
 public:
     QBoard() = default;
@@ -18,8 +20,24 @@ public:
     void decorate(std::shared_ptr<ISprite> sprite) override;
 
     const std::string getId() override;
-    const double getXPos() override;
-    const double getYPos() override;
-    void setXPos(const double x) override;
-    void setYPos(const double y) override;
+    double getXPos() override;
+    double getYPos() override;
+    void setXPos(double x) override;
+    void setYPos(double y) override;
+    const double getWidth();
+    const double setWidth(const double width);
+
+    const double getLength();
+    void setLength(const double length);
+
+
+signals:
+    void xPosChanged();
+    void yPosChanged();
+    void lengthChanged();
+
+
+private:
+    std::shared_ptr<Board> decoratedSprite_;
+
 };

@@ -14,22 +14,22 @@ const std::string QBall::getId() {
     return decoratedSprite_->getId();
 }
 
-const double QBall::getXPos()
+double QBall::getXPos()
 {
     return decoratedSprite_->getXPos();
 }
 
-const double QBall::getYPos()
+double QBall::getYPos()
 {
     return decoratedSprite_->getYPos();
 }
 
-void QBall::setXPos(const double x)
+void QBall::setXPos(double x)
 {
     decoratedSprite_->setXPos(x);
 }
 
-void QBall::setYPos(const double y)
+void QBall::setYPos(double y)
 {
     decoratedSprite_->setYPos(y);
 }

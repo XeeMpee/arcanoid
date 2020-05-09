@@ -14,12 +14,12 @@ const std::string QBlock::getId() {
     return decoratedSprite_->getId();
 }
 
-const double QBlock::getXPos()
+double QBlock::getXPos()
 {
     return decoratedSprite_->getXPos();
 }
 
-const double QBlock::getYPos()
+double QBlock::getYPos()
 {
     return decoratedSprite_->getYPos();
 }
