@@ -23,6 +23,8 @@ public:
     void initSprites(std::vector<std::shared_ptr<Board>> sprites) override;
     void initSprites(std::vector<std::shared_ptr<Ball>> sprites) override;
     void initSprites(std::vector<std::shared_ptr<Block>> sprites) override;
+    double getHeight() override;
+    double getWidth() override;
 
 private:
     int argcFake{0};

@@ -11,17 +11,15 @@ private:
     double length_;
 
 public:
-    Board(double length = 100, const std::string& id = "");
+    Board(const std::string &id = "", double length = 200, double x = 0, double y = 0);
     const std::string getId() override;
     double getXPos() override;
     double getYPos() override;
     void setXPos(double x) override;
     void setYPos(double y) override;
-    
+
     const double getLength();
     void setLength(const double length);
-
-
 
     ~Board() override = default;
 };

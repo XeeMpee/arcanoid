@@ -31,7 +31,7 @@ private:
     std::shared_ptr<IViewObject> view_;
     
     // Entities:
-    std::shared_ptr<Board> board_{new Board(100, "board")};
+    std::shared_ptr<Board> board_;
     std::shared_ptr<Ball> ball_{new Ball("ball")};
     std::vector<std::shared_ptr<Block>> blocks_{};
 

@@ -21,5 +21,7 @@ public:
     virtual void initSprites(std::vector<std::shared_ptr<Board>> sprites) = 0;
     virtual void initSprites(std::vector<std::shared_ptr<Ball>> sprites) = 0;
     virtual void initSprites(std::vector<std::shared_ptr<Block>> sprites) = 0;
+    virtual double getHeight() = 0;
+    virtual double getWidth() = 0;
     virtual void show() = 0;
 };

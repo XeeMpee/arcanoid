@@ -20,10 +20,10 @@ QViewObject::QViewObject()
 {
     // Qt App initialization:
     spdlog::info("Initialing QT based view...");
-    
+
     // Registing types types:
     registerQmlTypes();
-    
+
     // Qt View initialization:
     view_ = std::make_unique<QQuickView>();
     setViewProperties();
@@ -108,6 +108,16 @@ void QViewObject::initSprites(std::vector<std::shared_ptr<Ball>> sprites)
 void QViewObject::initSprites(std::vector<std::shared_ptr<Block>> sprites)
 {
     initSprites<QBlock>(VectorSubtypeConverter::convert<ISprite, Block>(sprites));
+}
+
+double QViewObject::getHeight()
+{
+    return height_;
+}
+
+double QViewObject::getWidth()
+{
+    return width_;
 }
 
 /**

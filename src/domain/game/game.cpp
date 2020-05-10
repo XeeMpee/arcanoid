@@ -12,9 +12,10 @@
 #include "domain/game/qgame.hpp"
 
 Game::Game(std::shared_ptr<IViewObject> view)
-    : view_(std::move(view))
+    : view_{view}
+    , board_{new Board("board", 150, view_->getWidth() / 2 - 75, view->getHeight() * 0.8)}
 {
-    auto wptr = std::shared_ptr<IGame>( this, [](IGame*){} );
+    auto wptr = std::shared_ptr<IGame>(this, [](IGame *) {});
 
     view_->initGame(shared_from_this());
     view_->initSprites({board_});
@@ -34,13 +35,11 @@ void Game::run()
 
     // Game loop:
     gameRunTask_ = std::async(std::launch::async, [this]() {
-        unsigned int cycle = 0;
         isRunning_ = true;
+        spdlog::info("Game main loop started.");
         while (isRunning_)
         {
             std::lock_guard<std::mutex> lock{gameLoopMutex_};
-            cycle++;
-            spdlog::info("Tick: {}", cycle);
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
     });
