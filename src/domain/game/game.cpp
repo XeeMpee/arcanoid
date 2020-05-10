@@ -13,7 +13,8 @@
 
 Game::Game(std::shared_ptr<IViewObject> view)
     : view_{view}
-    , board_{new Board("board", 150, view_->getWidth() / 2 - 75, view->getHeight() * 0.8)}
+    , board_{std::make_shared<Board>("board", 150, view_->getWidth() / 2 - 75, view->getHeight() * 0.8)}
+    , ball_{std::make_shared<Ball>("ball")}
 {
     auto wptr = std::shared_ptr<IGame>(this, [](IGame *) {});
 
@@ -40,7 +41,7 @@ void Game::run()
         while (isRunning_)
         {
             std::lock_guard<std::mutex> lock{gameLoopMutex_};
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps_));
         }
     });
 }

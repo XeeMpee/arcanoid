@@ -10,7 +10,7 @@ import com.game.entities 1.0
 Page {
 
     property var backendBoard : board
-    property double transitionValue : 20
+    property double transitionValue : 1
     
     header: Rectangle {
         height: 50

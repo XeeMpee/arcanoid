@@ -32,11 +32,12 @@ private:
     
     // Entities:
     std::shared_ptr<Board> board_;
-    std::shared_ptr<Ball> ball_{new Ball("ball")};
+    std::shared_ptr<Ball> ball_;
     std::vector<std::shared_ptr<Block>> blocks_{};
 
     // Game main loop:
     std::atomic<bool> isRunning_{false};
     std::shared_future<void> gameRunTask_;
     std::mutex gameLoopMutex_;
+    uint32_t fps_{60};
 };
