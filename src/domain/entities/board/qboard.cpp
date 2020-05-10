@@ -1,38 +1,46 @@
 #include <spdlog/spdlog.h>
 #include <boost/type_index.hpp>
+
 #include "qboard.hpp"
+#include "utils/downcaster.hpp"
+
 
 QBoard::QBoard(std::shared_ptr<ISprite> sprite)
 {
     decorate(sprite);
 }
 
+
+
+/**
+ *  Decorates sprite with <QBoard>
+ * 
+ *  Strong binding - requires sprite to be <Board> type. 
+ *  @param sprite sprite to decoration, needs to be exactly <Board> type
+ */
 void QBoard::decorate(std::shared_ptr<ISprite> sprite)
 {
-    decoratedSprite_ = std::dynamic_pointer_cast<Board>(sprite);
-    if (!decoratedSprite_)
-    {
-        auto msg = fmt::format("QBoard have to decorate Board object! Try of decoration wit [{}] failed",
-            boost::typeindex::type_id_runtime(sprite).pretty_name());
-        spdlog::error(msg);
-        throw std::runtime_error(msg);
-    }
+    decoratedSprite_ = Downcaster::cast<ISprite, Board>(sprite, "QBoard decorator must decorate Board sprite.");
 }
+
 
 const std::string QBoard::getId()
 {
     return decoratedSprite_->getId();
 }
 
+
 double QBoard::getXPos()
 {
     return decoratedSprite_->getXPos();
 }
 
+
 double QBoard::getYPos()
 {
     return decoratedSprite_->getYPos();
 }
+
 
 void QBoard::setXPos(double x)
 {
@@ -40,16 +48,19 @@ void QBoard::setXPos(double x)
     emit xPosChanged(x);
 }
 
+
 void QBoard::setYPos(double y)
 {
     decoratedSprite_->setYPos(y);
     emit yPosChanged(y);
 }
 
+
 const double QBoard::getLength()
 {
     return decoratedSprite_->getLength();
 }
+
 
 void QBoard::setLength(const double length)
 {
