@@ -227,3 +227,4 @@ Therefore every collision results in ball bounce.
 ### 3.5 Effects influence
 Board properties such as speed or length can by *Efects*  
 *Effects are descirbed here : **[6]***
+
